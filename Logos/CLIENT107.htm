@@ -1,0 +1,585 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0024)http://www.rlbindia.com/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="content-type" content="application/pdf">
+<meta name="viewport" content="initial-scale=1.0"><title>Prime Location Farmhouse, JDA Approved Flat &amp; Apartments Jaipur - RLB Group</title>
+<meta name="description" content="RLB Group is engaged in developing Prime Location Farmhouse and also works in developing JDA approved flats &amp; Apartments Jaipur is known for.">
+<meta name="keywords" content="prime location farmhouse, jda approved plot, jda approved Flat, shop ,property, villa ,resort, residential, commercial">
+
+<link rel="stylesheet" type="text/css" href="./RLB Group_files/style.css">
+<link rel="stylesheet" type="text/css" href="./RLB Group_files/style(1).css">
+<script type="text/javascript" async="" src="./RLB Group_files/ga.js"></script><script type="text/javascript" src="./RLB Group_files/jquery.min.js"></script>
+<script type="text/javascript">
+/*
+* Author:      Marco Kuiper (http://www.marcofolio.net/)
+*/
+
+// Speed of the automatic slideshow
+var slideshowSpeed = 9000;
+
+// Variable to store the images we need to set as background
+// which also includes some text and url's.
+var photos = [ 
+{
+
+		"title" : "banner3",
+		"image" : "uploads/13.jpg",
+		"url" : "http://www.sxc.hu/photo/1271909",
+		"firstline" : "Going on",
+		"secondline" : "vacation?"
+	},
+{
+
+		"title" : "banner2",
+		"image" : "uploads/12.jpg",
+		"url" : "http://www.sxc.hu/photo/1271909",
+		"firstline" : "Going on",
+		"secondline" : "vacation?"
+	},
+{
+
+		"title" : "banner1",
+		"image" : "uploads/11.jpg",
+		"url" : "http://www.sxc.hu/photo/1271909",
+		"firstline" : "Going on",
+		"secondline" : "vacation?"
+	},
+ 
+];
+
+
+
+$(document).ready(function() {
+		
+	// Backwards navigation
+	$("#back").click(function() {
+		stopAnimation();
+		navigate("back");
+	});
+	
+	// Forward navigation
+	$("#next").click(function() {
+		stopAnimation();
+		navigate("next");
+	});
+	
+	var interval;
+	$("#control").toggle(function(){
+		stopAnimation();
+	}, function() {
+		// Change the background image to "pause"
+		$(this).css({ "background-image" : "url(images/btn_pause.png)" });
+		
+		// Show the next image
+		navigate("next");
+		
+		// Start playing the animation
+		interval = setInterval(function() {
+			navigate("next");
+		}, slideshowSpeed);
+	});
+	
+	
+	var activeContainer = 1;	
+	var currentImg = 0;
+	var animating = false;
+	var navigate = function(direction) {
+		// Check if no animation is running. If it is, prevent the action
+		if(animating) {
+			return;
+		}
+		
+		// Check which current image we need to show
+		if(direction == "next") {
+			currentImg++;
+			if(currentImg == photos.length + 1) {
+				currentImg = 1;
+			}
+		} else {
+			currentImg--;
+			if(currentImg == 0) {
+				currentImg = photos.length;
+			}
+		}
+		
+		// Check which container we need to use
+		var currentContainer = activeContainer;
+		if(activeContainer == 1) {
+			activeContainer = 2;
+		} else {
+			activeContainer = 1;
+		}
+		
+		showImage(photos[currentImg - 1], currentContainer, activeContainer);
+		
+	};
+	
+	var currentZindex = -1;
+	var showImage = function(photoObject, currentContainer, activeContainer) {
+		animating = true;
+		
+		// Make sure the new container is always on the background
+		currentZindex--;
+		
+		// Set the background image of the new active container
+		$("#headerimg" + activeContainer).css({
+			"background-image" : "url(Admin/" + photoObject.image + ")",
+			"display" : "block",
+			"z-index" : currentZindex
+		});
+		
+		// Hide the header text
+		$("#headertxt").css({"display" : "none"});
+		
+		// Set the new header text
+		$("#firstline").html(photoObject.firstline);
+		$("#secondline")
+			.attr("href", photoObject.url)
+			.html(photoObject.secondline);
+		$("#pictureduri")
+			.attr("href", photoObject.url)
+			.html(photoObject.title);
+		
+		
+		// Fade out the current container
+		// and display the header text when animation is complete
+		$("#headerimg" + currentContainer).fadeOut(function() {
+			setTimeout(function() {
+				$("#headertxt").css({"display" : "block"});
+				animating = false;
+			}, 500);
+		});
+	};
+	
+	var stopAnimation = function() {
+		// Change the background image to "play"
+		$("#control").css({ "background-image" : "url(images/btn_play.png)" });
+		
+		// Clear the interval
+		clearInterval(interval);
+	};
+	
+	// We should statically set the first image
+	navigate("next");
+	
+	// Start playing the animation
+	interval = setInterval(function() {
+		navigate("next");
+	}, slideshowSpeed);
+	
+});
+</script><!-- Custom scrollbars CSS -->
+<link href="./RLB Group_files/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-39105427-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+<script type="text/javascript" src="./RLB Group_files/jquery.min(1).js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.login-window').click(function() {
+		
+		// Getting the variable's value from a link 
+		var loginBox = $(this).attr('href');
+
+		//Fade in the Popup and add close button
+		$(loginBox).fadeIn(300);
+		
+		//Set the center alignment padding + border
+		var popMargTop = ($(loginBox).height() + 24) / 2; 
+		var popMargLeft = ($(loginBox).width() + 24) / 2; 
+		
+		$(loginBox).css({ 
+			'margin-top' : -popMargTop,
+			'margin-left' : -popMargLeft
+		});
+		
+		// Add the mask to body
+		$('body').append('<div id="mask"></div>');
+		$('#mask').fadeIn(300);
+		
+		return false;
+	});
+	
+	// When clicking on the button close or the mask layer the popup closed
+	$('a.close, #mask').live('click', function() { 
+	  $('#mask , .login-popup').fadeOut(300 , function() {
+		$('#mask').remove();  
+	}); 
+	return false;
+	});
+});
+</script>
+<style type="text/css">
+#content {	float: left; width: 100%;}
+
+.post { margin: 0 auto; padding-bottom: 50px; float: left; width: 960px; }
+
+.btn-sign {
+	width:460px;
+	margin-bottom:20px;
+	margin:0 auto;
+	padding:20px;
+	border-radius:5px;
+	background: -moz-linear-gradient(center top, #00c6ff, #018eb6);
+    background: -webkit-gradient(linear, left top, left bottom, from(#00c6ff), to(#018eb6));
+	background:  -o-linear-gradient(top, #00c6ff, #018eb6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#00c6ff', EndColorStr='#018eb6');
+	text-align:center;
+	font-size:36px;
+	color:#fff;
+	text-transform:uppercase;
+}
+
+.btn-sign a { color:#fff; text-shadow:0 1px 2px #161616; }
+
+#mask {
+	display: none;
+	background: #000; 
+	position: fixed; left: 0; top: 0; 
+	z-index: 10;
+	width: 100%; height: 100%;
+	opacity: 0.8;
+	z-index: 999;
+}
+
+.login-popup{
+	display:none;
+	background: #333;
+	padding: 10px; 	
+	border: 2px solid #ddd;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 99999;
+	box-shadow: 0px 0px 20px #999;
+	-moz-box-shadow: 0px 0px 20px #999; /* Firefox */
+    -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
+	border-radius:3px 3px 3px 3px;
+    -moz-border-radius: 3px; /* Firefox */
+    -webkit-border-radius: 3px; /* Safari, Chrome */
+}
+
+img.btn_close {
+	float: right; 
+	margin: -28px -28px 0 0;
+}
+
+fieldset { 
+	border:none; 
+}
+
+form.signin .textbox label { 
+	display:block; 
+	padding-bottom:7px; 
+}
+
+form.signin .textbox span { 
+	display:block;
+}
+
+form.signin p, form.signin span { 
+	color:#999; 
+	font-size:11px; 
+	line-height:18px;
+} 
+
+form.signin .textbox input { 
+	background:#666666; 
+	border-bottom:1px solid #333;
+	border-left:1px solid #000;
+	border-right:1px solid #333;
+	border-top:1px solid #000;
+	color:#fff; 
+	border-radius: 3px 3px 3px 3px;
+	-moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+	font:13px Arial, Helvetica, sans-serif;
+	padding:6px 6px 4px;
+	width:200px;
+}
+
+form.signin input:-moz-placeholder { color:#bbb; text-shadow:0 0 2px #000; }
+form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #000;  }
+
+.button { 
+	background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
+	background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
+	background:  -o-linear-gradient(top, #f3f3f3, #dddddd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f3f3f3', EndColorStr='#dddddd');
+	border-color:#000; 
+	border-width:1px;
+	border-radius:4px 4px 4px 4px;
+	-moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+	color:#333;
+	cursor:pointer;
+	display:inline-block;
+	padding:6px 6px 4px;
+	margin-top:10px;
+	font:12px; 
+	width:214px;
+}
+
+.button:hover { background:#ddd; }
+
+</style>
+<script type="text/javascript" src="./RLB Group_files/jquery.min(1).js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.login-window').click(function() {
+		
+		// Getting the variable's value from a link 
+		var loginBox = $(this).attr('href');
+
+		//Fade in the Popup and add close button
+		$(loginBox).fadeIn(300);
+		
+		//Set the center alignment padding + border
+		var popMargTop = ($(loginBox).height() + 24) / 2; 
+		var popMargLeft = ($(loginBox).width() + 24) / 2; 
+		
+		$(loginBox).css({ 
+			'margin-top' : -popMargTop,
+			'margin-left' : -popMargLeft
+		});
+		
+		// Add the mask to body
+		$('body').append('<div id="mask"></div>');
+		$('#mask').fadeIn(300);
+		
+		return false;
+	});
+	
+	// When clicking on the button close or the mask layer the popup closed
+	$('a.close, #mask').live('click', function() { 
+	  $('#mask , .login-popup').fadeOut(300 , function() {
+		$('#mask').remove();  
+	}); 
+	return false;
+	});
+});
+</script>
+<script type="text/javascript">
+function validate(){
+	var x=document.forms['enquiry']['name'].value;
+	if(x==null || x==""){
+	alert("Please Enter Name !!!!")
+	return false;
+	}
+	var y=document.forms["enquiry"]["email"].value;
+	var atpos=y.indexOf("@");
+	var dotpos=y.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=y.length)
+  	{
+  	alert("Not a valid e-mail address");
+  	return false;
+  	}
+	var z=document.forms['enquiry']['phone'].value;
+	if(z==''){
+	alert("Please Enter Phone Number");
+	return false;
+	}
+	else if(isNaN(z)||z.indexOf(" ")!=-1){
+	alert("Please Enter Valid Phone Number");
+	return false;
+	}
+	else if(z.length<10){
+	alert("Please Enter Valid Phone Number Minimim 10 Digit or Add STD Code");
+	return false;
+	}
+}
+</script>
+<script src="./RLB Group_files/jquery-latest.js"></script>
+<script>
+$(document).ready(function(){
+ 
+$('#submit').click(function(){
+ 
+$.post("enquiry.php", $("#mycontactform").serialize(),  function(response) {
+$('#success').html(response);
+//$('#success').hide('slow');
+});
+return false;
+ 
+});
+ 
+});
+</script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="./RLB Group_files/jquery-1.9.1.js"></script>
+<script src="./RLB Group_files/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://www.rlbindia.com/resources/demos/style.css">
+<script>
+  $(function() {
+    $( "#dialog" ).dialog();
+  });
+</script>
+<div id="header">
+	<!-- jQuery handles to place the header background images -->
+	<div id="headerimgs">
+		<div id="headerimg1" class="headerimg" style="display: none; z-index: -3; background-image: url(http://www.rlbindia.com/Admin/uploads/12.jpg);"></div>
+		<div id="headerimg2" class="headerimg" style="display: block; z-index: -4; background-image: url(http://www.rlbindia.com/Admin/uploads/11.jpg);"></div>		
+	</div>
+<div style="float:right; position:fixed; right:0; top:200px;">
+<a href="http://www.rlbindia.com/#login-box" class="login-window"><img src="./RLB Group_files/get.png" border="0"></a>
+<div id="login-box" class="login-popup">
+   <a href="http://www.rlbindia.com/#" class="close"><img src="./RLB Group_files/close_pop.png" class="btn_close" title="Close Window" alt="Close" border="0"></a>
+    <form method="post" class="signin" action="" onsubmit="return validate();" name="enquiry" id="mycontactform">
+        <fieldset class="textbox">
+        <label class="username">
+        <span>Your Name</span>
+        <input id="name" name="name" value="" type="text" autocomplete="on" placeholder="Name">
+        </label>
+        <label class="username">
+        <span>Your Email</span>
+        <input id="email" name="email" value="" type="text" autocomplete="on" placeholder="Email Address">
+        </label>
+                
+        <label class="password">
+         <span>Phone No.</span>
+         <input id="phone" name="phone" value="" type="text" placeholder="Phone Number">
+         </label>
+         
+         <label class="username">
+        <span>Your Message</span>
+        <textarea cols="3" rows="3" placeholder="Your Message" name="message" id="message" style="width:200px; height:150px; background:#666666; margin:10px 0 0 0; color:#FFF;"></textarea>
+        </label>
+                
+         <input type="submit" name="submit" id="submit" value="Send Enquiry">
+                
+      </fieldset>
+      <div id="success" style="color:red;"></div>
+    </form>
+</div>
+</div><script src="./RLB Group_files/jquery-1.2.6.min.js" type="text/javascript"></script>
+<!-- Slideshow controls -->
+
+	<div id="headernav-outer">
+		<div id="headernav">
+			<div id="back" class="btn"></div>
+			<div id="control" class="btn"></div>
+			<div id="next" class="btn"></div>
+		</div>
+	</div>
+		
+<!-- jQuery handles for the text displayed on top of the images -->
+<div class="main-menu">
+		<ul>
+			<li style="background:#8cb5f2;"><a href="./RLB Group_files/RLB Group.htm">Home</a></li>
+			<li style="background:#a1af06;"><a href="http://www.rlbindia.com/projects.php">Projects</a></li>
+			<li style="background:#804e4e;"><a href="http://www.rlbindia.com/photo-gallery.php">Photo Gallery</a></li>
+			<li style="background:#931818;"><a href="http://www.rlbindia.com/testimonial.php">Testimonial</a></li>
+			<li style="background:#f157aa;"><a href="http://www.rlbindia.com/contact.php">Contact Us</a></li>
+		</ul>
+</div><div style="float:left; width:800px; margin:0 0 0 50px; bottom:0; position:fixed;">
+	<p style="color:#FFCC66; text-align:justify;">RLB group is a magnificent team of such fine people delivering solutions to all housing dreams of an ordinary man. They offer beautiful prime location farmhouses on affordable prices and away from the busy life of a metropolitan city, away from the cobwebs. All JDA approved plots and flats can be availed through RLB Group. The entrusted team is at your service to deliver the best results in the world of modernization where everyone is in a race running behind their goals to be accomplished.
+	</p>
+</div>
+<div style="float:left; position:fixed; bottom:0; width:400px; right:0; color:#FFCC33;">
+<div itemscope="" itemtype="http://schema.org/LocalBusiness">
+<a itemprop="url" href="./RLB Group_files/RLB Group.htm"><div itemprop="name"><strong>RLB Group</strong></div>
+</a>
+<div itemprop="description">We are here.. To make success your dream.</div>
+<div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+<span itemprop="streetAddress">F-12, Ram Path, Shyam Nagar New Sanganer Road, Jaipur 302019</span><br>
+P.O. Box: <span itemprop="postOfficeBoxNumber">302019</span>
+<span itemprop="addressLocality">Jaipur,</span>
+<span itemprop="addressRegion">Rajasthan,</span>
+<span itemprop="postalCode">302019,</span>
+<span itemprop="addressCountry">India</span>
+</div>
+</div>
+
+</div>
+<!--Include JQuery Style File-->
+<link href="./RLB Group_files/jquery-ui-1.8.22.custom.css" rel="stylesheet" type="text/css">
+ 
+<!--Include JQuery File-->
+<script type="text/javascript" language="Javascript" src="./RLB Group_files/jquery.min(2).js"></script>
+ 
+<!--Include JQuery UI File-->
+<script type="text/javascript" language="Javascript" src="./RLB Group_files/jquery-ui.min.js"></script>
+ 
+
+<script type="text/javascript">
+    $(function () {
+        $("#dialog").dialog();
+    });
+</script>
+
+
+<embed src="FM AD.MP3" autostart="true" hidden="true" style="visibility:hidden;">
+</div>
+	
+	<!-- Get Google CDN's jQuery and jQuery UI with fallback to local -->
+	<script src="./RLB Group_files/jquery.min(3).js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="jquery/jquery-1.8.0.min.js"%3E%3C/script%3E'))</script>
+	<script src="./RLB Group_files/jquery-ui.min(1).js"></script>
+	<script>!window.jQuery.ui && document.write(unescape('%3Cscript src="jquery/jquery-ui-1.8.23.custom.min.js"%3E%3C/script%3E'))</script>
+	<!-- mousewheel plugin -->
+	<script src="./RLB Group_files/jquery.mousewheel.min.js"></script>
+	<!-- custom scrollbars plugin -->
+	<script src="./RLB Group_files/jquery.mCustomScrollbar.js"></script>
+	<script>
+		(function($){
+			$(window).load(function(){
+				$("#content_1").mCustomScrollbar({
+					/*scrollInertia:0,*/
+					scrollButtons:{
+						enable:true
+					},
+					callbacks:{
+						onScrollStart:function(){ OnScrollStart(); },
+						onScroll:function(){ OnScroll(); },
+						onTotalScroll:function(){ OnTotalScroll(); },
+						onTotalScrollBack:function(){ OnTotalScrollBack(); },
+						onTotalScrollOffset:30,
+						whileScrolling:function(){ WhileScrolling(); } 
+					}
+				});
+				function OnScrollStart(){
+					$(".output .onScrollStart").stop(true,true).text("").css("display","inline-block").text("Scroll started").fadeOut(500,"easeInCirc");
+				}
+				function OnScroll(){
+					$(".output .onScroll").stop(true,true).text("").css("display","inline-block").text("Scrolled...").fadeOut(500,"easeInCirc");
+				}
+				function OnTotalScroll(){
+					$(".output .onTotalScroll").stop(true,true).text("").css("display","inline-block").text("Scroll end reached").fadeOut(500,"easeInCirc");
+				}
+				function OnTotalScrollBack(){
+					$(".output .onTotalScrollBack").stop(true,true).text("").css("display","inline-block").text("Scroll begin reached").fadeOut(500,"easeInCirc");
+				}
+				function WhileScrolling(){
+					$(".output .whileScrolling").stop(true,true).css("display","inline-block").text("Scrolling").fadeOut(500,"easeInCirc");
+				}
+				$(".output a").click(function(e){
+					e.preventDefault();
+					var $this=$(this),
+						rel=$this.attr("rel"),
+						target=$this.parent().find("."+rel);
+					target.add($this).toggleClass("hidden");
+				});
+			});
+		})(jQuery);
+	</script>
+		
+
+
+<div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-dialog" style="display: block; z-index: 1001; outline: 0px; position: absolute; height: auto; width: 300px; top: 240.5px; left: 529px;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-dialog">My Dialog Title</span><a href="http://www.rlbindia.com/#" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div><div id="dialog" style="width: auto; min-height: 0px; height: 126.60000038147px;" class="ui-dialog-content ui-widget-content" scrolltop="0" scrollleft="0">
+    <p>This is My Dialog box Description/Content</p>   
+    <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1000;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1000;"></div></div></body></html>
