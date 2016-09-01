@@ -1,4 +1,4 @@
-<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ClientMaster.aspx.vb" MasterPageFile="MasterPage.master" Inherits="Admin_ClientMaster" %>
+<%@ Page Language="VB" AutoEventWireup="false" CodeFile="ClientMaster.aspx.vb"  MasterPageFile="MasterPage.master" Inherits="Admin_ClientMaster" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" Runat="Server">
     <title>Client Registration</title>
      <link rel="icon" href="images/hslogo.jpg" type="image/x-icon"/>

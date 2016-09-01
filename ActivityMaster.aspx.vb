@@ -9,54 +9,37 @@ Partial Class Admin_ActivityMaster
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If db.checkUser(Application("users"), Session("loginName"), Session.SessionID) <> "OK" Then
-        '    Response.Redirect("sessionOut.aspx")
-        'Else
-        '    db.setLayout(Session("userId"), form1)
-        'End If
-
         If Not IsPostBack Then
             db.fillCombo(drpCat, "Division", "Name", "ID", "where ParentID=0 order by ID")
-            'lblError.Text = ""
-            ShowData()
         End If
     End Sub
 
     Protected Sub btnSubmit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
         Try
             If btnSubmit.Text = "Update" Then
-
-                db.qry = "Update DIVISION set Name='" & txtCatName.Text & "',IsActive='" & drpFlg.SelectedValue & "' where ID='" & lblid.Text & "'"
-
-                btnSubmit.Text = "Create Sub Category"
-
+                db.qry = "Update DIVISION set Name='" & txtCatName.Text & "',IsActive='" & IIf(Convert.ToInt16(drpFlg.SelectedValue) = 0, 1, 0) & "' where ID='" & lblid.Text & "'"
+                btnSubmit.Text = "Submit"
+                db.executeQuery()
+                Dim e1 As New GridViewCancelEditEventArgs(Convert.ToInt32(lblid.Text))
+                GVSubCat_RowCancelingEdit(sender, e1)
             Else
-
                 Dim strSCatId As String
                 If txtId.Text <> "" Then
                     strSCatId = txtId.Text
-
-
                 End If
-
                 If db.isExists("DIVISION", "Name", txtCatName.Text, False) = False Then
-                    db.qry = "insert into DIVISION (Name,ParentId,IsActive) values('" & txtCatName.Text & "'," & drpCat.SelectedValue & "," & drpFlg.SelectedValue & ")"
+                    db.qry = "insert into DIVISION (Name,ParentId,IsActive) values('" & txtCatName.Text & "'," & drpCat.SelectedValue & "," & IIf(Convert.ToInt16(drpFlg.SelectedValue) = 0, 1, 0) & ")"
+
 
                 Else
                     'lblError.Text = "Already Exists!!!"
                 End If
             End If
 
-
-            db.executeQuery()
-
             clear()
             ShowData()
 
         Catch ex As Exception
-            'lblError.Text = ex.Message
-
-
 
         End Try
 
@@ -71,38 +54,44 @@ Partial Class Admin_ActivityMaster
         drpCat.Enabled = True
         drpCat.SelectedValue = 0
 
-        btnSubmit.Text = "Create Sub Category!"
+        btnSubmit.Text = "Submit"
     End Sub
     Private Sub ShowData()
         Try
-            strqry1 = "select * from division where ParentID=" & drpCat.SelectedValue
-            dt1 = db.fillReader1(strqry1)
-            dr = dt1.CreateDataReader()
+            If drpCat.SelectedValue <> "0" Then
+
+                strqry1 = "select * from division where ParentID=" & drpCat.SelectedValue
+                dt1 = db.fillReader1(strqry1)
+                dr = dt1.CreateDataReader()
 
 
-            Dim tbl As New DataTable
-            Dim drw As DataRow
-            tbl.Columns.Add("first").ColumnName = "SNo"
-            tbl.Columns.Add("second").ColumnName = "Name"
-            tbl.Columns.Add("third").ColumnName = "Status"
-            tbl.Columns.Add("fourth").ColumnName = "Action"
+                Dim tbl As New DataTable
+                Dim drw As DataRow
+                tbl.Columns.Add("first").ColumnName = "ID"
+                tbl.Columns.Add("second").ColumnName = "Name"
+                tbl.Columns.Add("third").ColumnName = "IsActive"
+                tbl.Columns.Add("fourth").ColumnName = "Action"
 
-            While dr.Read()
+                While dr.Read()
+                    drw = tbl.NewRow
+                    drw(0) = tbl.Rows.Count + 1
+                    drw(1) = dr("Name")
+                    If dr("IsActive").ToString() = "True" Then
+                        drw(2) = "Active"
+                    Else
+                        drw(2) = "InActive"
+                    End If
 
-                drw = tbl.NewRow
-                drw(0) = tbl.Rows.Count + 1
-                drw(1) = dr("Name")
-                If dr("IsActive").ToString() = "True" Then
-                    drw(2) = "Active"
-                Else
-                    drw(2) = "InActive"
-                End If
+                    tbl.Rows.Add(drw)
+                End While
+                GVSubCat.DataSource = tbl
+                GVSubCat.DataBind()
+                dr.Close()
+            Else
+                GVSubCat.DataSource = New List(Of String)
+                GVSubCat.DataBind()
 
-                tbl.Rows.Add(drw)
-            End While
-            GVSubCat.DataSource = tbl
-            GVSubCat.DataBind()
-            dr.Close()
+            End If
         Catch ex As Exception
             'lblError.Text = ex.Message
         End Try
@@ -110,15 +99,20 @@ Partial Class Admin_ActivityMaster
 
     Protected Sub drpCat_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles drpCat.SelectedIndexChanged
         Try
-            strqry1 = "select * from division where ParentID=" & drpCat.SelectedValue
-            dt1 = db.fillReader1(strqry1)
-            dr = dt1.CreateDataReader()
-            GVSubCat.DataSource = dt1
-            GVSubCat.DataBind()
-            dr.Close()
-            dt1.Clear()
-            dt1.Dispose()
 
+            If drpCat.SelectedValue <> "0" Then
+                strqry1 = "select * from division where ParentID=" & drpCat.SelectedValue
+                dt1 = db.fillReader1(strqry1)
+                dr = dt1.CreateDataReader()
+                GVSubCat.DataSource = dt1
+                GVSubCat.DataBind()
+                dr.Close()
+                dt1.Clear()
+                dt1.Dispose()
+            Else
+                GVSubCat.DataSource = New List(Of String)
+                GVSubCat.DataBind()
+            End If
         Catch ex As Exception
             'lblError.Text = ex.Message
         End Try
@@ -131,20 +125,7 @@ Partial Class Admin_ActivityMaster
             If flg = "True" Then
                 e.Row.Cells(2).Text = "Active"
             Else
-                e.Row.Cells(2).Text = "Inactive"
-            End If
-
-            Dim lnk As LinkButton
-            lnk = CType(e.Row.FindControl("lnkDelete"), LinkButton)
-            Dim Department As String = DataBinder.Eval(e.Row.DataItem, "ID").ToString()
-            If db.isExists("Employee", "SubDivisionID", Department, False) = True Then
-                lnk.Visible = False
-                'End If
-                'If GVDivision.EditIndex = -1 
-            Else
-                Dim lnk11 As LinkButton
-                lnk11 = CType(e.Row.FindControl("lnkDelete"), LinkButton)
-                lnk11.Attributes.Add("onclick", "return confirm('Do you want to delete?')")
+                e.Row.Cells(2).Text = "InActive"
             End If
         End If
     End Sub
@@ -163,12 +144,21 @@ Partial Class Admin_ActivityMaster
         If dr.Read() Then
             drpCat.SelectedValue = dr("ParentID").ToString()
             txtCatName.Text = dr("Name")
-            drpFlg.SelectedIndex = Convert.ToInt16(dr("IsActive"))
+            drpFlg.SelectedIndex = IIf(Convert.ToInt16(dr("IsActive")) = 0, 1, 0)
             btnSubmit.Text = "Update"
+            lblid.Text = strId
             lblid.Visible = False
         End If
         dr.Close()
         dt1.Clear()
         dt1.Dispose()
+        ShowData()
+    End Sub
+
+    Protected Sub GVSubCat_RowCancelingEdit(sender As Object, e As GridViewCancelEditEventArgs) Handles GVSubCat.RowCancelingEdit
+        GVSubCat.EditIndex = -1
+        ShowData()
+        clear()
+        btnSubmit.Text = "Submit"
     End Sub
 End Class

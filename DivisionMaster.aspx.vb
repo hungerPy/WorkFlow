@@ -54,7 +54,7 @@ Partial Class Admin_DivisionMaster
 
     Private Sub ShowDivision()
         Dim companyid As String = Session("companyid")
-        strqry1 = "select * from Division order by Name"
+        strqry1 = "select * from Division where parentID=0 order by Name"
         dt1 = db.fillReader1(strqry1)
         dr = dt1.CreateDataReader()
         If dr.hasrows Then

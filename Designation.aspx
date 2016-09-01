@@ -32,7 +32,19 @@
                           <div class="control-group">
                         <label for="Departid" class="control-label">Department *</label> 
                         <div class="controls">
-                        <asp:DropDownList ID="DrpDepartment" runat="server" CssClass="validate[required,funcCall[drp2[]]]" ToolTip="Department Name"></asp:DropDownList>
+                        <asp:DropDownList ID="DrpDepartment" runat="server" CssClass="validate[required,funcCall[drp2[]]]" ToolTip="Department Name" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                        </div>  
+                             <div class="control-group">
+                        <label for="Departid" class="control-label">Sub Division</label> 
+                        <div class="controls">
+                        <asp:DropDownList ID="DrpDivision" runat="server"  ToolTip="Department Name" AutoPostBack="true"></asp:DropDownList>
+                        </div>
+                        </div>  
+                             <div class="control-group">
+                        <label for="Departid" class="control-label">Activity</label> 
+                        <div class="controls">
+                        <asp:DropDownList ID="DrpActivity" runat="server"  ToolTip="Department Name"></asp:DropDownList>
                         </div>
                         </div>  
                         <div class="control-group">
@@ -60,7 +72,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Designation">
                             <ItemTemplate>
-                                <%#Eval("DesignationName")%>
+                                <%#Eval("Name")%>
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Left" Width="15%" />
                         </asp:TemplateField>

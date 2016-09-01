@@ -11,36 +11,44 @@ Partial Class Designation
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            db.fillCombo(DrpDepartment, "Department", "DepartmentName", "ID", " order by DepartmentName")
+            db.fillCombo(DrpDepartment, "Division", "Name", "ID", "where ParentID=0 order by Name")
             ShowDesignation()
         End If
     End Sub
 
     Protected Sub btnSubmit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSubmit.Click
-        if
 
-            If Not db.isExists("Designation", "DesignationName", txtDesgination.Text, False, " and ID <> " & txtId.Text) Then
+        If btnSubmit.Text = "Submit" Then
 
-                db.qry = "insert into Designation(DepartmentID,DesignationName,Description,IsActive) values(" & DrpDepartment.SelectedItem.Value & ",'" & txtDesgination.Text & "','" & txtDescription.Text & "')"
-                db.executeQuery()
-                If txtId.Text <> "" Then
-                    Dim e1 As New GridViewCancelEditEventArgs(Convert.ToInt32(txtId.Text))
-                    GVDesignations_RowCancelingEdit(sender, e1)
-                End If
-            Else
-                Response.Write("<Script>alert('Duplicate Designation name.')</script>")
-                txtDescription.Text = ""
-            End If
-
-            ShowDesignation()
-            txtId.Text = ""
-            txtDescription.Text = ""
-            txtDesgination.Text = ""
+            db.qry = "update set DepartmentId=" & DrpDepartment.SelectedValue & ",SubDivisionId=" & DrpDivision.SelectedValue & ",ActivityId=" & DrpActivity.SelectedValue & ",Name=" & txtDesgination.Text & ",Description=" & txtDescription.Text & ""
             btnSubmit.Text = "Submit"
+            db.executeQuery()
+            Dim e1 As New GridViewCancelEditEventArgs(Convert.ToInt32(txtId.Text))
+            GVDesignations_RowCancelingEdit(sender, e1)
+        Else
+
+        End If
+        If Not db.isExists("Designation", "DesignationName", txtDesgination.Text, False, " and ID <> " & txtId.Text) Then
+            db.qry = "insert into Designation(DepartmentID,DesignationName,Description,IsActive) values(" & DrpDepartment.SelectedItem.Value & ",'" & txtDesgination.Text & "','" & txtDescription.Text & "')"
+            db.executeQuery()
+            If txtId.Text <> "" Then
+                Dim e1 As New GridViewCancelEditEventArgs(Convert.ToInt32(txtId.Text))
+                GVDesignations_RowCancelingEdit(sender, e1)
+            End If
+        Else
+            Response.Write("<Script>alert('Duplicate Designation name.')</script>")
+            txtDescription.Text = ""
+        End If
+
+        ShowDesignation()
+        txtId.Text = ""
+        txtDescription.Text = ""
+        txtDesgination.Text = ""
+        btnSubmit.Text = "Submit"
     End Sub
 
     Private Sub ShowDesignation()
-        strqry1 = "select * from Designation order by DesignationName"
+        strqry1 = "select * from Designation order by Name"
         dt1 = db.fillReader1(strqry1)
         dr = dt1.CreateDataReader()
         If dr.HasRows Then
@@ -105,5 +113,32 @@ Partial Class Designation
         dt1.Clear()
         dt1.Dispose()
         ShowDesignation()
+    End Sub
+
+    Protected Sub DrpDepartment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DrpDepartment.SelectedIndexChanged
+        Try
+            If DrpDepartment.SelectedValue <> "0" Then
+                db.fillCombo(DrpDivision, "Division", "Name", "ID", "where ParentID=" & DrpDepartment.SelectedValue & " order by Name")
+            Else
+                db.fillCombo(DrpDivision, "Division", "Name", "ID", "where 1=2")
+                db.fillCombo(DrpActivity, "Division", "Name", "ID", "where 1=2")
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Protected Sub DrpDivision_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DrpDivision.SelectedIndexChanged
+        Try
+            If DrpDepartment.SelectedValue <> "0" And DrpDivision.SelectedValue <> "0" Then
+                db.fillCombo(DrpActivity, "Division", "Name", "ID", "where ParentID=" & DrpDivision.SelectedValue & " order by Name")
+            Else
+                db.fillCombo(DrpActivity, "Division", "Name", "ID", "where 1=2")
+            End If
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class
